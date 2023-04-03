@@ -2,60 +2,15 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useApi from "../Hooks/useApi";
-
-const mainContainer = {
-  width: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  minHeight: "50vh",
-  background: "",
-  // background: "#8E2DE2",
-  // background: "-webkit-linear-gradient(to bottom, #4A00E0, #8E2DE2)",
-  //background: "linear-gradient(to bottom, #4A00E0, #8E2DE2)",
-};
-const formContainer = {
-  width: "300px",
-  backgroundColor: "#fff",
-  borderRadius: "10px",
-  boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.1)",
-  padding: "5px 30px 30px 30px",
-};
-const formTitle = {
-  color: "#f25e60",
-  textAlign: "center",
-  marginBottom: "20px",
-};
-const formStyle = {
-  display: "flex",
-  flexDirection: "column",
-};
-const labelStyle = {
-  marginBottom: "10px",
-  fontWeight: "bold",
-  align: "left",
-};
-const inputStyle = {
-  width: "100%",
-  padding: "10px",
-  marginBottom: "20px",
-  marginRight: "20px",
-  border: "1px solid #f25e60",
-  borderRadius: "5px",
-  boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.1)",
-};
-const buttonStyle = {
-  width: "50%",
-  textAlign: "center",
-  backgroundColor: "#f25e60",
-  color: "#fff",
-  padding: "10px",
-  borderRadius: "5px",
-  border: "none",
-  cursor: "pointer",
-  boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.1)",
-  transition: "backgroundColor 0.2s ease-in-out",
-};
+import {
+  mainContainer,
+  inputStyle,
+  formContainer,
+  formTitle,
+  formStyle,
+  labelStyle,
+  buttonStyle,
+} from "../Components/FormStyles";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -132,5 +87,5 @@ export default function Login() {
         </div>
       </div>
     );
-  else return <Navigate to="/todo" replace/>;
+  else return <Navigate to="/todo" replace />;
 }

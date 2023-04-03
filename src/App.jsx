@@ -6,6 +6,7 @@ import Home from "./Routes/Home";
 import Page404 from "./Routes/Page404";
 import CheckAuth from "./Components/CheckAuth";
 import Navbar from "./Components/NavBar";
+import TodoInsert from "./Routes/Todos/TodoInsert";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/todon" element={<TodoInsert />} />
         <Route
           path="/todo"
           element={
