@@ -1,30 +1,27 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { TextField, Button } from "@mui/material";
 import useApi from "../Hooks/useApi";
 import {
   mainContainer,
-  inputStyle,
   formContainer,
   formTitle,
   formStyle,
-  labelStyle,
-  buttonStyle,
 } from "../Components/FormStyles";
 
 export default function Login() {
   const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(localStorage.getItem("jwt"));
   const { api, setAuthorizationHeader } = useApi();
-  const [username, setUsername] = useState("a@a.com");
-  const [password, setPassword] = useState("pass@123");
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
   const [error, setError] = useState();
   const url = "http://localhost:5002/auth/login";
   const data = {
     email: username,
     password: password,
   };
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -32,13 +29,14 @@ export default function Login() {
       .post(url, data)
       .then((response) => {
         if (response.status === 200) {
-          const responseData = response.data.data.token;
-          setAuthorizationHeader(responseData);
+          console.log(response.data.token);
+          const token = response.data.token;
+          setAuthorizationHeader(token);
           navigate("/todo", { replace: true });
         }
       })
       .catch((err) => {
-        const errorMessage = err.response.data.data.message;
+        const errorMessage = err.response.data.message;
         console.log(errorMessage);
         setError(errorMessage);
       });
@@ -50,40 +48,39 @@ export default function Login() {
           <h1 style={formTitle}>User Login</h1>
           {error}
           <form style={formStyle} onSubmit={handleFormSubmit}>
-            <label style={labelStyle}>Username</label>
-            <input
-              style={inputStyle}
-              type="text"
-              placeholder="Username"
+            <TextField
+              required
+              fullWidth
+              margin="normal"
+              label="Username"
               value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
+              onChange={(e) => setUsername(e.target.value)}
             />
-            <label style={labelStyle}>Password</label>
-            <input
-              style={inputStyle}
+            <TextField
+              required
+              fullWidth
+              margin="normal"
+              label="Password"
               type="password"
-              placeholder="Password"
               value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <div style={{ textAlign: "center" }}>
-              <button
-                style={buttonStyle}
-                onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = "#F08080";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = "#f25e60";
-                }}
-              >
-                Submit
-              </button>
-            </div>
+            <Button type="submit" variant="contained" color="primary">
+              Sign In
+            </Button>
           </form>
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              Register
+            </Button>
+          </div>
         </div>
       </div>
     );

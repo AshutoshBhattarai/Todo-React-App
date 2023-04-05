@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/todon" element={<TodoInsert />} />
+        <Route path="insert" element={<TodoInsert />} />
         <Route
           path="/todo"
           element={
@@ -23,7 +23,8 @@ function App() {
               <Todo />
             </CheckAuth>
           }
-        />
+        >
+        </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>
     </>

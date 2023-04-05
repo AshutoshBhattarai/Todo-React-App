@@ -44,6 +44,11 @@ const Navbar = () => {
             Login
           </a>
         </li>
+        <li>
+          <a href="/logout" style={linkStyles}>
+              Logout
+          </a>
+        </li>
       </ul>
     </nav>
   );
