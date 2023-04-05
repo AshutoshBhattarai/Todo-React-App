@@ -1,0 +1,58 @@
+.mainbox {
+    background-color: #95c2de;
+    margin: auto;
+    height: 600px;
+    width: 600px;
+    position: relative;
+  }
+  .mainbox a {
+    text-decoration: none;
+    color: white;
+  }
+  .mainbox a:hover {
+    text-decoration: underline;
+  }
+  
+  .err {
+    color: #ffffff;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 11rem;
+    position: absolute;
+    left: 30%;
+    top: 9%;
+  }
+  
+  .err1 {
+    color: #ffffff;
+    position: absolute;
+    font-size: 8.5rem;
+    left: 5%;
+    top: 15%;
+  }
+  
+  .far {
+    position: absolute;
+    font-size: 7.5rem;
+    left: 50%;
+    top: 15%;
+    color: #ffffff;
+  }
+  
+  .err2 {
+    color: #ffffff;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 11rem;
+    position: absolute;
+    left: 68%;
+    top: 9%;
+  }
+  
+  .msg {
+    text-align: center;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1.6rem;
+    position: absolute;
+    left: 16%;
+    top: 45%;
+    width: 75%;
+  }/*# sourceMappingURL=ErrorPage.module.css.map */

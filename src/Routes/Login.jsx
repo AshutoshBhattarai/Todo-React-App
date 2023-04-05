@@ -53,7 +53,6 @@ export default function Login() {
               fullWidth
               margin="normal"
               label="Username"
-              value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <TextField
@@ -62,7 +61,6 @@ export default function Login() {
               margin="normal"
               label="Password"
               type="password"
-              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button type="submit" variant="contained" color="primary">

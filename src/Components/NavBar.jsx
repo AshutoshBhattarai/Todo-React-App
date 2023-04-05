@@ -4,7 +4,7 @@ const Navbar = () => {
   const navStyles = {
     display: "flex",
     justifyContent: "flex-end",
-    backgroundColor: "#f25e60",
+    background:"transparent",
     padding: "10px",
   };
 
@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   const linkStyles = {
-    color: "#fff",
+    color: "#000",
     textDecoration: "none",
     fontSize: "18px",
     fontWeight: "600",
@@ -46,7 +46,7 @@ const Navbar = () => {
         </li>
         <li>
           <a href="/logout" style={linkStyles}>
-              Logout
+            Logout
           </a>
         </li>
       </ul>
