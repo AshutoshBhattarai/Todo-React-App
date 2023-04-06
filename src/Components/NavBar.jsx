@@ -1,10 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const navStyles = {
     display: "flex",
     justifyContent: "flex-end",
-    background:"transparent",
+    background: "#000",
     padding: "10px",
   };
 
@@ -18,11 +20,12 @@ const Navbar = () => {
   };
 
   const linkStyles = {
-    color: "#000",
+    color: "#fff",
     textDecoration: "none",
     fontSize: "18px",
     fontWeight: "600",
     padding: "30px",
+    cursor: "pointer",
     transition: "all 0.2s ease-in-out",
   };
 
@@ -45,7 +48,13 @@ const Navbar = () => {
           </a>
         </li>
         <li>
-          <a href="/logout" style={linkStyles}>
+          <a
+            style={linkStyles}
+            onClick={() => {
+              localStorage.setItem("jwt", "");
+              navigate("/login", { replace: true });
+            }}
+          >
             Logout
           </a>
         </li>
