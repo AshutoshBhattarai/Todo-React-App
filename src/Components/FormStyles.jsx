@@ -17,7 +17,7 @@ const mainContainer = {
     padding: "5px 30px 30px 30px",
   };
   const formTitle = {
-    color: "#f25e60",
+    color: "#95C2DE",
     textAlign: "center",
     marginBottom: "20px",
   };
@@ -36,14 +36,14 @@ const mainContainer = {
     padding: "10px",
     marginBottom: "20px",
     marginRight: "20px",
-    border: "1px solid #f25e60",
+    border: "1px solid #95C2DE",
     borderRadius: "5px",
     boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.1)",
   };
   const buttonStyle = {
     width: "50%",
     textAlign: "center",
-    backgroundColor: "#f25e60",
+    backgroundColor: "#95C2DE",
     color: "#fff",
     padding: "10px",
     borderRadius: "5px",
