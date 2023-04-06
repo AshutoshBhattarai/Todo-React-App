@@ -1,10 +1,11 @@
-import { DeleteForever } from "@mui/icons-material";
+import { DeleteForever, Edit } from "@mui/icons-material";
 import {
   Box,
   Button,
   Card,
   CardActions,
   CardContent,
+  Chip,
   IconButton,
   Typography,
 } from "@mui/material";
@@ -57,10 +58,15 @@ const TodoComponent = ({ todos, deleteTodo }) => {
             <Typography gutterBottom sx={fontSize}>
               Due Date: {todos.complete_on}
             </Typography>
+            {todos.completed ? (
+              <Chip label="Completed" variant="outlined" color="success" />
+            ) : (
+              <Chip label="Pending" variant="outlined" color="primary" />
+            )}
           </CardContent>
-
           <CardActions>
             <Button
+              startIcon={<Edit />}
               size="small"
               variant="outlined"
               color="success"

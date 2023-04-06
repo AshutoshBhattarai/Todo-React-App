@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
 import useAxios from "../../Hooks/useApi";
 import { useNavigate } from "react-router-dom";
-import { Container, Grid } from "@mui/material";
+import { CircularProgress, Container, Grid } from "@mui/material";
 import TodoComponent from "./TodoComponent";
-import TodoAddDialog from "./TodoAddDialog";
-
-const cardContainer = {
-  marginLeft: "20%",
-};
+import TodoAddDialog from "./TodoAdd";
+import DisplayAlert from "../../Components/DisplayAlert";
 
 export default function Todo() {
-  const [todo, setTodo] = useState(null);
   const navigate = useNavigate();
   const { api } = useAxios();
+
+  const [todo, setTodo] = useState(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState("");
+
   useEffect(() => {
+    if (openSnackbar) {
+      console.log("Displaying snackbar");
+    }
     setIsDeleted(false);
     setIsAdded(false);
     getTodos();
@@ -25,30 +29,39 @@ export default function Todo() {
     api
       .get("todos/user/all")
       .then((response) => {
-        console.log(response);
         if (response.status === 200) setTodo(response.data);
       })
       .catch((err) => {
         if (err.response.status === 401) redirectToLogin();
       });
   };
+
   const deleteTodo = (id) => {
     api
       .post("/todos/delete", { id })
       .then((response) => {
-        if (response.status == 200) setIsDeleted(true);
+        if (response.status == 200) {
+          setIsDeleted(true);
+          setSnackbarMsg("Todos deleted successfully.");
+          setOpenSnackbar(true);
+        }
       })
       .catch((err) => console.log(err));
   };
+
   const addTodo = (data) => {
     api
       .post("/todos/save", {
         title: data.title,
         description: data.description,
-        completeOn: "2023-03-30",
+        completeOn: data.date,
       })
       .then((response) => {
-        if (response.status == 200) setIsAdded(true);
+        if (response.status == 200) {
+          setIsAdded(true);
+          setSnackbarMsg("Todos added successfully.");
+          setOpenSnackbar(true);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -57,6 +70,9 @@ export default function Todo() {
     localStorage.setItem("jwt", "");
     navigate("/login", { replace: true });
   };
+  const closeSnackBar = () => {
+    setOpenSnackbar(false);
+  };
 
   return (
     <div
@@ -64,6 +80,12 @@ export default function Todo() {
         background: "transparent",
       }}
     >
+      <DisplayAlert
+        open={openSnackbar}
+        message={snackbarMsg}
+        close={closeSnackBar}
+      />
+      ;
       <div
         style={{
           display: "flex",
@@ -71,7 +93,7 @@ export default function Todo() {
           alignItems: "center",
         }}
       >
-        <h1 style={{ color: "#f25e60" }}>Your Todos</h1>
+        <h1 style={{ marginLeft: "20px", color: "#f25e60" }}>Your Todos</h1>
         <TodoAddDialog addTodo={addTodo} />
       </div>
       {/* <div style={cardContainer}> */}
@@ -93,7 +115,10 @@ export default function Todo() {
               //return <TodoDisplay todos={e} key={e.id} deleteTodo={deleteTodo} />;
             })
           ) : (
-            <p>Loading ............</p>
+            <>
+              <CircularProgress color="inherit" />
+              <pre> Loading ............</pre>
+            </>
           )}
         </Grid>
       </Container>
