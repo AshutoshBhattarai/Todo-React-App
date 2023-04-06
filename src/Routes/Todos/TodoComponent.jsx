@@ -61,7 +61,7 @@ const TodoComponent = ({ todos, deleteTodo }) => {
             {todos.completed ? (
               <Chip label="Completed" variant="outlined" color="success" />
             ) : (
-              <Chip label="Pending" variant="outlined" color="primary" />
+              <Chip label="Pending" variant="outlined" color="info" />
             )}
           </CardContent>
           <CardActions>

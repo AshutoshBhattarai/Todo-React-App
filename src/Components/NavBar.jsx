@@ -6,7 +6,7 @@ const Navbar = () => {
   const navStyles = {
     display: "flex",
     justifyContent: "flex-end",
-    background: "#000",
+    background: "#f25e60",
     padding: "10px",
   };
 

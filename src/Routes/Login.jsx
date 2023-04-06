@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button,Typography } from "@mui/material";
 import useApi from "../Hooks/useApi";
 import {
   mainContainer,
@@ -13,7 +13,7 @@ import {
 export default function Login() {
   const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(localStorage.getItem("jwt"));
-  const { api, setAuthorizationHeader } = useApi();
+  const { setAuthorizationHeader } = useApi();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
@@ -29,7 +29,6 @@ export default function Login() {
       .post(url, data)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data.token);
           const token = response.data.token;
           setAuthorizationHeader(token);
           navigate("/todo", { replace: true });
@@ -37,7 +36,6 @@ export default function Login() {
       })
       .catch((err) => {
         const errorMessage = err.response.data.message;
-        console.log(errorMessage);
         setError(errorMessage);
       });
   };
@@ -67,7 +65,8 @@ export default function Login() {
               Sign In
             </Button>
           </form>
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <Typography gutterBottom marginTop="10px" align="center" color='primary'>Or</Typography>
+          <div style={{ textAlign: "center" }}>
             <Button
               type="submit"
               variant="contained"

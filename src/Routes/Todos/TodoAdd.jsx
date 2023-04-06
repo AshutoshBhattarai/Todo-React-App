@@ -106,7 +106,7 @@ const TodoAddDialog = ({ addTodo }) => {
           <Button onClick={handleClose} color="error">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="success">
+          <Button onClick={handleSubmit} color="info">
             Submit
           </Button>
         </DialogActions>
