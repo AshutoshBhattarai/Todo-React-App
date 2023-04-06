@@ -96,6 +96,7 @@ const TodoAddDialog = ({ addTodo }) => {
           />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
+              sx={{marginTop :'10px'}}
               label="Due Date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e)}

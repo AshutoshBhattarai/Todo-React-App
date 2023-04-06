@@ -42,7 +42,7 @@ export default function Todo() {
       .then((response) => {
         if (response.status == 200) {
           setIsDeleted(true);
-          setSnackbarMsg("Todos deleted successfully.");
+          setSnackbarMsg("Todo deleted successfully.");
           setOpenSnackbar(true);
         }
       })
@@ -59,7 +59,7 @@ export default function Todo() {
       .then((response) => {
         if (response.status == 200) {
           setIsAdded(true);
-          setSnackbarMsg("Todos added successfully.");
+          setSnackbarMsg("Todo added successfully.");
           setOpenSnackbar(true);
         }
       })
