@@ -1,5 +1,7 @@
 import { React, createContext, useContext, useState } from "react";
-
+/* -------------------------------------------------------------------------- */
+/*                                  Not Used                                  */
+/* -------------------------------------------------------------------------- */
 const ErrorContext = createContext(null);
 export const useErrorContext = () => {
   return useContext(ErrorContext);
