@@ -13,19 +13,42 @@ import {
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import React, { useState } from "react";
+import useAxios from "../../Hooks/useApi";
 
-const TodoDialog = ({ open, close, todo }) => {
+const TodoDialog = ({ update, open, close, todo }) => {
+  const [title, setTitle] = useState(todo.title);
+  const [description, setDescription] = useState(todo.description);
+  const [dueDate, setDueDate] = useState(todo.complete_on);
+  const [checked, setChecked] = useState(todo.completed);
+  const displayDate = Date.parse(dueDate);
   const handleSubmit = () => {
-    console.log("Submit");
+    let newDate = null;
+    const addZero = (zer) => {
+      if (zer.length == 1) return 0 + zer;
+      else return zer;
+    };
+    if (dueDate == todo.complete_on) {
+      newDate = dueDate;
+    } else {
+      let year = dueDate.getFullYear();
+      let month = addZero((dueDate.getMonth() + 1).toString());
+      let day = addZero(dueDate.getDate().toString());
+      newDate = `${year}-${month}-${day}`;
+    }
+    const data = {
+      id : todo.id,
+      title,
+      description,
+      completeOn: newDate.toString(),
+      completed: checked,
+    };
+    update(data);
     handleClose();
   };
   const handleClose = () => {
     close(false);
   };
-  const [title, setTitle] = useState(todo.title);
-  const [description, setDescription] = useState(todo.description);
-  const [dueDate, setDueDate] = useState();
-  const [checked, setChecked] = useState(todo.completed);
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Update Your Todo</DialogTitle>
@@ -59,7 +82,7 @@ const TodoDialog = ({ open, close, todo }) => {
           <DatePicker
             label="Due Date"
             sx={{ marginTop: "10px" }}
-            value={dueDate}
+            value={displayDate}
             onChange={(e) => setDueDate(e)}
           />
         </LocalizationProvider>
@@ -67,7 +90,7 @@ const TodoDialog = ({ open, close, todo }) => {
           <FormControlLabel
             control={
               <Switch
-                sx={{marginTop : "10px" }}
+                sx={{ marginTop: "10px" }}
                 color="success"
                 checked={checked}
                 onChange={() => {

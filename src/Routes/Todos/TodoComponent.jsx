@@ -12,14 +12,14 @@ import {
 import React, { useState } from "react";
 import TodoDialog from "./TodoDialog";
 
-const TodoComponent = ({ todos, deleteTodo }) => {
+const TodoComponent = ({ todos, deleteTodo,updateTodo }) => {
   const fontSize = {
     fontSize: 15,
   };
   const [openEdit, setOpenEdit] = useState(false);
   return (
     <>
-    <TodoDialog open={openEdit} close={setOpenEdit} todo={todos} />
+    <TodoDialog update={updateTodo} open={openEdit} close={setOpenEdit} todo={todos} />
       <Box
         sx={{
           border: "1px solid #f5f0f0",
@@ -74,7 +74,6 @@ const TodoComponent = ({ todos, deleteTodo }) => {
               variant="outlined"
               color="success"
               onClick={() => {
-                console.log(`Editing...${todos.id}`);
                 setOpenEdit(true);
               }}
             >

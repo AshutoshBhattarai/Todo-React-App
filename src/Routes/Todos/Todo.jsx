@@ -5,6 +5,7 @@ import { CircularProgress, Container, Grid } from "@mui/material";
 import TodoComponent from "./TodoComponent";
 import TodoAddDialog from "./TodoAdd";
 import DisplayAlert from "../../Components/DisplayAlert";
+import { useErrorContext } from "../../Context/useError";
 
 export default function Todo() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export default function Todo() {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [snackbarMsg, setSnackbarMsg] = useState("");
+  const useError = useErrorContext();
 
   useEffect(() => {
     if (openSnackbar) {
@@ -32,7 +34,9 @@ export default function Todo() {
         if (response.status === 200) setTodo(response.data);
       })
       .catch((err) => {
-        if (err.response.status === 401) redirectToLogin();
+        if (err.response.status === 401) {
+          redirectToLogin();
+        }
       });
   };
 
@@ -60,6 +64,24 @@ export default function Todo() {
         if (response.status == 200) {
           setIsAdded(true);
           setSnackbarMsg("Todo added successfully.");
+          setOpenSnackbar(true);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  const updateTodo = (data) => {
+    api
+      .post("/todos/updateAll", {
+        id : data.id,
+        title: data.title,
+        description: data.description,
+        completeOn: data.completeOn,
+        completed : data.completed
+      })
+      .then((response) => {
+        if (response.status == 200) {
+          setIsAdded(true);
+          setSnackbarMsg("Todo Updated successfully.");
           setOpenSnackbar(true);
         }
       })
@@ -108,6 +130,7 @@ export default function Todo() {
                       todos={e}
                       key={e.id}
                       deleteTodo={deleteTodo}
+                      updateTodo={updateTodo}
                     />
                   </Grid>
                 </>
