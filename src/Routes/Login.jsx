@@ -14,8 +14,8 @@ export default function Login() {
   const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(localStorage.getItem("jwt"));
   const { setAuthorizationHeader } = useApi();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState();
   const url = "http://localhost:5002/auth/login";
   const data = {
