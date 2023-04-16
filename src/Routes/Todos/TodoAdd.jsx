@@ -34,13 +34,10 @@ const TodoAddDialog = ({ addTodo }) => {
       if (zer.length == 1) return 0 + zer;
       else return zer;
     };
-    let date = selectedDate;
     let year = selectedDate.getFullYear();
     let month = addZero((selectedDate.getMonth() + 1).toString());
     let day = addZero(selectedDate.getDate().toString());
     let newDate = `${year}-${month}-${day}`;
-    console.log(newDate);
-    console.log(selectedDate);
     addTodo({
       title,
       description,
