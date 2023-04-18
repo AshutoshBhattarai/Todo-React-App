@@ -6,10 +6,10 @@ import Home from "./Routes/Home";
 import Page404 from "./Routes/Error/Page404";
 import CheckAuth from "./Components/CheckAuth";
 import Navbar from "./Components/NavBar";
-import { ErrorProvider } from "./Context/useError";
+import { ErrorCtxProvider } from "./Hooks/useError";
 function App() {
   return (
-    <ErrorProvider>
+    <ErrorCtxProvider>
     <>
       <Navbar />
       <Routes>
@@ -27,7 +27,7 @@ function App() {
         <Route path="*" element={<Page404 />} />
       </Routes>
     </>
-    </ErrorProvider>
+    </ErrorCtxProvider>
   );
 }
 

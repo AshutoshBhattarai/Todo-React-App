@@ -25,11 +25,13 @@ const Register = () => {
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
     axios
       .post(url, data)
       .then((response) => {
-        console.log(response);
+        if(response.status === 200)
+        {
+          navigate('/login',{replace : true});
+        }
       })
       .catch((err) => {
         if (err.response.status == 400) setError(err.response.data.message);

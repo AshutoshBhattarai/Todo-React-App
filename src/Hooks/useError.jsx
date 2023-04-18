@@ -1,20 +1,20 @@
 import { React, createContext, useContext, useState } from "react";
 /* -------------------------------------------------------------------------- */
-/*                                  Not Used                                  */
+/*                                  Used Doesnt Work                         */
 /* -------------------------------------------------------------------------- */
-const ErrorContext = createContext(null);
-export const useErrorContext = () => {
-  return useContext(ErrorContext);
-};
-
-export const ErrorProvider = ({ children }) => {
+const ErrorCtx = createContext(null);
+export const ErrorCtxProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const errorDisplay = (err) => {
     setError(err);
   };
   return (
-    <ErrorContext.Provider value={{ error, errorDisplay }}>
+    <ErrorCtx.Provider value={{ error, errorDisplay }}>
       {children}
-    </ErrorContext.Provider>
+    </ErrorCtx.Provider>
   );
+};
+
+export const useErrorContext = () => {
+  return useContext(ErrorCtx);
 };

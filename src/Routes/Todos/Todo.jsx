@@ -5,7 +5,6 @@ import { CircularProgress, Container, Grid } from "@mui/material";
 import TodoComponent from "./TodoComponent";
 import TodoAddDialog from "./TodoAdd";
 import DisplayAlert from "../../Components/DisplayAlert";
-import { useErrorContext } from "../../Context/useError";
 
 export default function Todo() {
   const navigate = useNavigate();
@@ -16,7 +15,6 @@ export default function Todo() {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [snackbarMsg, setSnackbarMsg] = useState("");
-  const useError = useErrorContext();
 
   useEffect(() => {
     if (openSnackbar) {
